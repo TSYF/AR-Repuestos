@@ -15,7 +15,7 @@ Para un producto mínimo viable, la aplicación tendrá la capacidad de:
 El stack planeado para este proyecto consiste en las siguientes tecnologías:
 * HTML5
 * CSS3
-* Bootstrap 5
+* Bootstrap 4
 * JavaScript
 * JQuery
 * Python
