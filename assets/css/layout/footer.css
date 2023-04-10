@@ -32,18 +32,6 @@
      color: #efefef;
      margin-bottom: 10px;
  }
- .footer__grup1 .footer__social a{
-     display: inline-block;
-     text-decoration: none;
-     width: 45px;
-     height: 45px;
-     line-height: 45px;
-     color:#fff;
-     margin-right: 10px;
-     background-color: #000000;
-     text-align: center;
-     transition: all 300ms ease;
- }
  .footer__grup1 .footer__social a:hover{
      color: aqua;
  }
@@ -63,4 +51,23 @@
          grid-gap: 30px;
          padding: 35px 0px;
      }
+ }
+
+.footer__social {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: .625rem;
+}
+
+ .footer__icono {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    width : 3rem;
+    height: 3rem;
+    color:#fff;
+    background-color: #000000;
+    transition: all 300ms ease;
  }
