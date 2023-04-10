@@ -1,0 +1,66 @@
+.footer{
+    width: 100%;
+    background-color: #1a1a1a;
+ }
+ .footer__grup1{
+     width: 100%;
+     max-width: 1200px;
+     margin: auto;
+     display: grid;
+     grid-template-columns: repeat(3,1fr);
+     grid-gap: 50px;
+     padding: 45px 0px;
+ }
+ 
+ .footer__grup1 .footer__box .footer__figure{
+     width: 100%;
+     height: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+ 
+ .footer__grup1 .footer__box .footer__figure .footer__img{
+     width: 250px;
+ }
+ .footer__grup1 .footer__box .footer__titulo{
+     color: #fff;
+     margin-bottom: 25px;
+     font-size: 20px;
+ }
+ .footer__grup1 .footer__box .footer__contenido{
+     color: #efefef;
+     margin-bottom: 10px;
+ }
+ .footer__grup1 .footer__social a{
+     display: inline-block;
+     text-decoration: none;
+     width: 45px;
+     height: 45px;
+     line-height: 45px;
+     color:#fff;
+     margin-right: 10px;
+     background-color: #000000;
+     text-align: center;
+     transition: all 300ms ease;
+ }
+ .footer__grup1 .footer__social a:hover{
+     color: aqua;
+ }
+ .footer__grup2{
+     background-color: #1a1a1a;
+     padding: 15px 10px;
+     text-align: center;
+     color:#fff;
+ }
+ .footer__grup2 .footer__small{
+     font-size: 15px;
+ }
+ @media screen and (max-width:800px) {
+     .footer__grup1{
+         width: 90%;
+         grid-template-columns: repeat(1,1fr);
+         grid-gap: 30px;
+         padding: 35px 0px;
+     }
+ }
