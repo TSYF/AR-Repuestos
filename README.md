@@ -7,7 +7,7 @@ El propósito del proyecto es tanto crear un producto viable para AR Repuestos c
 <br>
 Para un producto mínimo viable, la aplicación tendrá la capacidad de:
 * Acceder a una breve descripción de la empresa y sus servicios.
-* Percibir imágenes de trabajos de estética realizados previamente. 
+* Percibir imágenes de trabajos de estética realizados previamente.
 * Ver, buscar, seleccionar y añadir al carrito de compra los productos demostrados.
 * Contratar servicios de estética automotriz.
 
