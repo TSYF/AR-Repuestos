@@ -1,0 +1,14 @@
+.carro-compra {
+    transition: .5s opacity ease;
+    color: inherit;
+    opacity: .6;
+}
+
+.carro-compra:hover {
+    opacity: 1;
+    color: inherit;
+}
+
+.navbar-brand > img {
+    max-height: 2em;
+}
