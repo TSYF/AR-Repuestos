@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="assets/css/pages/trabajos.css">
 		<title>AR Repuestos</title>
 	</head>
-	<body>
+	<body class="d-flex justify-content-start align-items-stretch flex-column flex-nowrap">
 		<nav class="navbar navbar-expand-md navbar-light bg-light sticky">
 			<!-- Agregar el logo de la pagina/empresa en donde esta escrito el texto LOGO, buscar la imagen logo ya que no funicona la que descarger -->
 			<a class="navbar-brand" href="#"> 
@@ -32,14 +32,10 @@
 			  id="navbarNavAltMarkup"
 			>
 			  <div class="navbar-nav ml-auto align-items-end p-2">
-				<a
-				  class="nav-item nav-link active"
-				  href="#"
-				  >Inicio <span class="sr-only">(current)</span></a>
-				<a class="nav-item nav-link" href="#">Tienda</a>
-				<a class="nav-item nav-link" href="#">Nuestro Trabajo</a>
-				<a class="nav-item nav-link" href="#"
-				  >Contratar Detailing</a>
+				<a  class="nav-item nav-link"  href=".">Inicio</a>
+				<a class="nav-item nav-link" href="tienda.html">Tienda</a>
+				<a class="nav-item nav-link active" href="#">Nuestro Trabajo<span class="sr-only"> (current)</span></a>
+				<a class="nav-item nav-link" href="detailing.html">Contratar Detailing</a>
 				<a class="nav-item carro-compra" href="#">
 					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
 						<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
@@ -49,36 +45,43 @@
 			</div>
 		</nav>
 		
-		<main class="main p-2 m-0">
-			<section class="img-section text-center">
-				<div class="row">
-					<div class="col-12 col-md">
+		<main class="main bg-dark py-2 m-0">
+			<section class="container-fluid">
+				<div class="row p-5 text-light">
+					<!-- Diseño 1 -->
+					<div class="col-md-4">
+						<!--falta agregar las imagen correspodientes-->
+						<img src="assets/img/trabajos/ARR_mercedes.JPEG" class="img-fluid rounded" alt="Muestra de nuestro trabajo">
 					</div>
-					<div class="col-12 col-md">
-					</div>
-					<div class="col-12 col-md">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12 col-md">
-					</div>
-					<div class="col-12 col-md">
-					</div>
-					<div class="col-12 col-md">
+					<div class="col-md-8">
+						<h2>Reparación de Autos</h2>
+						<p>Como se puede observar en la imagen de referecnia nuestra empresa esta a cargar de la reparacion de autos por lo tanto años de experecia que tenemos, por lo tanto si necesita ayuda con tu auto llamanos</p>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-12 col-md">
+				<div class="row p-5 bg-light text-dark">
+					<!-- Diseño 2 con una puequña diferencia que lo tira a la derecha en vez de a la izqueirda -->
+					<div class="col-md-8" class="Moto">
+						<h2>Reparación de un motor</h2>
+						<p>Como se puede observar en la imagen de referecnia de nuestra empresa nosostro reparamos todo tipo de cosa relacioanda con los auto ademas de vender todo tipo de pieza que se relacionan con ella, por lo tanto si necsita nuestra ayuda no dude en contactarnos</p>
 					</div>
-					<div class="col-12 col-md">
+					<div class="col-md-4">
+						<img src="assets/img/trabajos/ARR_mazda.JPEG" class="img-fluid rounded" alt="Muestra de nuestro trabajo">
 					</div>
-					<div class="col-12 col-md">
+				</div>
+				<div class="row p-5 text-light">
+					<!-- Diseño 3 es igual 1 -->
+					<div class="col-md-4">
+						<img src="assets/img/trabajos/ARR_symbol.JPEG" class="img-fluid rounded" alt="Muestra de nuestro trabajo">
+					</div>
+					<div class="col-md-8">
+						<h2>Venta de respuesto</h2>
+						<p> Nuestra tienda virtual/pagina web esta encargada de llevar nuestro producto y experecia a un maximo nivel con nuestro cliente ademas de poseer un gran stock de producto tenemos la acreditacion de haber trabajado con grande marca y poseer lo respuesto de esa grande marca, por lo tanto si necestia nuestra ayuda no dude en contactarnos</p>
 					</div>
 				</div>
 			</section>
 		</main>
 		
-		<footer class="footer">
+		<footer class="footer mt-auto">
 			<div class="footer__row footer__row--top">
 				<div class="footer__box">
 					<figure class="footer__figure">
