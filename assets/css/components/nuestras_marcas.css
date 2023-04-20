@@ -1,3 +1,34 @@
-.carousel .d-flex {
-    gap: 1rem;
+.carousel--nuestras-marcas {
+    height: 90vh;
+}
+
+.carousel--nuestras-marcas .carousel-inner {
+    height: 85%;
+}
+
+.carousel--nuestras-marcas .carousel-item {
+    height: 100%;
+}
+
+.carousel--nuestras-marcas .carousel-item > .d-flex {
+    gap: .5rem;
+    height: 100%;
+}
+
+.carousel--nuestras-marcas .carousel__img {
+    display: block;
+    width: calc(25% - 1rem);
+    height: calc((100% / 3) - 1rem);
+}
+
+.carousel--nuestras-marcas .carousel-indicators {
+    position: static;
+}
+
+.carousel--nuestras-marcas .carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel--nuestras-marcas .carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
 }
