@@ -1,0 +1,18 @@
+.carrito {
+    display: none;
+
+    padding: 1em;
+
+    height: 200px;
+    width: 200px;
+
+    position: absolute;
+    top: 4.5rem;
+    right: 0;
+    z-index: 1;
+
+
+    background-color: #FFFFFF;
+    border: 2px solid #CCCCCC;
+    border-radius: 1em 0 1em 1em;
+}

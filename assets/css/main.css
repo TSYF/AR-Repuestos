@@ -3,5 +3,7 @@
 
 @import 'abstracts/variables.css';
 
+@import 'components/carrito.css';
+
 @import 'layout/navigation.css';
 @import 'layout/footer.css';
