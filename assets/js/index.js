@@ -1,4 +1,10 @@
-import { showCarrito, logShit } from "./components/carrito.js";
+import { showCarrito } from "./utils/carrito.js";
 
-showCarrito();
-logShit();
+
+const btnCarrito = document.querySelector("[data-toggle-carrito]");
+
+btnCarrito.addEventListener("click", e => {
+    e.preventDefault();
+
+    showCarrito();
+});
