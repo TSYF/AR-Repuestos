@@ -1,18 +1,43 @@
 .carrito {
-    display: none;
-
     padding: 1em;
 
     height: 200px;
-    width: 200px;
+    width: 20rem;
 
     position: absolute;
     top: 4.5rem;
     right: 0;
-    z-index: 1;
+    z-index: 6;
 
 
-    background-color: #FFFFFF;
     border: 2px solid #CCCCCC;
-    border-radius: 1em 0 1em 1em;
+    border-top: none;
+    border-right: none;
+    border-radius: 0 0 0 1em;
+}
+
+.carrito__header {
+    text-align: center;
+}
+
+.carrito__item-list {
+    font-size: 18px;
+    list-style: none;
+    
+    padding: 0 1em 1em 1em;
+    margin: 0;
+}
+
+
+.carrito__item {
+    border-bottom: 2px solid #CCCCCC;
+}
+.carrito__item:last-child {
+    border-bottom: none;
+}
+
+
+.carrito__item-count {
+    display: inline-block;
+    margin-left: auto;
 }
