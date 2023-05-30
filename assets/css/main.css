@@ -3,5 +3,7 @@
 
 @import 'abstracts/variables.css';
 
+@import 'components/manage_user.css';
+
 @import 'layout/navigation.css';
 @import 'layout/footer.css';

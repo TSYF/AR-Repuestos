@@ -1,0 +1,26 @@
+.manage-user {
+    position: absolute;
+
+    top: 4.5rem;
+    right: 0;
+    z-index: 6;
+
+    border-radius: 0 0 0 .5em;
+}
+
+.manage-user__option {
+    text-decoration: none;
+    color: inherit;
+    opacity: 1;
+    transition: opacity ease-in-out .5;
+}
+
+.manage-user__option:hover {
+    text-decoration: none;
+    color: inherit;
+    opacity: .6;
+}
+
+.manage-user__option:last-child {
+    border-bottom: none;
+}
