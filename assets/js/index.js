@@ -41,11 +41,5 @@ $(() => {
     });
 
     
-    const btnCarrito = document.querySelector("[data-toggle-carrito]");
-    
-    btnCarrito.addEventListener("click", e => {
-        e.preventDefault();
-    
-        showCarrito();
-    });
+    $("[data-toggle-carrito]").click(e => showCarrito() );
 });
