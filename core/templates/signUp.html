@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block main %}
+	<main class="main p-4 m-5">
+		<div class="container my-5">
+			<h2 class="text-center mb-5">Registrar Usuario</h2>
+			<form class="w-50 mx-auto" id="form_signup">
+				<div class="form-group row">
+					<label class="col-5" for="email">Correo Electronico</label>
+					<input class="col-7" type="email" class="form-control" id="email" name="email" placeholder="correo@proveedor.com">
+				</div>
+				<div class="form-group row">
+					<label class="col-5" for="password">Contraseña</label>
+					<input class="col-7" type="password" id="password" name="password" placeholder="123456">
+				</div>
+				<div class="form-group row">
+					<label class="col-5" for="confirm">Confirmar Contraseña</label>
+					<input class="col-7" type="password" id="confirm" name="confirm" placeholder="123456">
+				</div>
+				<button type="submit" class="btn btn-info">Sign Up</button>
+			</form>
+		</div>
+	</main>
+{% endblock main %}
+
+{% block scripts %}
+	<!-- signUp Script -->
+	<script src="/assets/js/views/signUp.js" type="module"></script>
+{% endblock scripts %}
