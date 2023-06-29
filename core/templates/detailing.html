@@ -11,7 +11,8 @@
 	<main class="main p-4 m-5">
 		<div class="container my-5">
 			<h2 class="text-center mb-5">Datos de Contacto</h2>
-			<form class="w-50 mx-auto" id="form_contacto">
+			<form class="w-50 mx-auto" id="form_contacto" method="POST" action="{% url 'detailing.store' %}"> {% comment %} {% url 'rest.contacto-detailing' %} {% endcomment %}
+				{% csrf_token %}
 				<div class="form-group row">
 					<label class="col-5" for="rut">RUT</label>
 					<input class="col-7" type="text" id="rut" name="rut" placeholder="12345678-9">
@@ -29,8 +30,13 @@
 					<input class="col-7" type="email" class="form-control" id="email" name="email" placeholder="correo@proveedor.com">
 				</div>
 				<div class="form-group row">
-					<label class="col-5" for="rut">Producto que desea contratar</label>
-					<input class="col-7" type="text" id="rut" name="producto" placeholder="Spoiler">
+					<label class="col-5" for="servicio">Servicio que desea contratar</label>
+					<select class="col-7" name="servicio" id="servicio">
+						<option value="0" selected>Seleccione un servicio</option>
+						{% for servicio in servicios %}
+							<option value="{{ servicio.id }}">{{ servicio.nombre }}</option>
+						{% endfor %}
+					</select>
 				</div>
 				<button type="submit" class="btn btn-primary">Enviar</button>
 			
@@ -39,7 +45,7 @@
 </main>
 {% endblock main %}
 
-{% block script %}
+{% block scripts %}
 	<!-- Detailing Script -->
 	<script src="{% static 'core/js/views/detailing.js' %}" type="module"></script>
-{% endblock script %}
+{% endblock scripts %}
