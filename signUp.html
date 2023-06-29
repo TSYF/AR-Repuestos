@@ -26,20 +26,6 @@
 				</button>
 			</section>
 		</article>
-		
-		<article id="carrito" class="carrito d-none bg-light p-2">
-			<h4 class="carrito__header">Carrito de Compra</h4>
-			<section class="carrito__body">
-				<ul class="carrito__item-list">
-					<li class="carrito__item">Capot <span class="carrito__item-count">5</span></li>
-					<li class="carrito__item">Spoiler <span class="carrito__item-count">5</span></li>
-					<li class="carrito__item">Wea <span class="carrito__item-count">5</span></li>
-					<li class="carrito__item">Cariñosas <span class="carrito__item-count">5</span></li>
-					<li class="carrito__item">Sustancias Ilícitas <span class="carrito__item-count">5</span></li>
-				</ul>
-			</section>
-		</article>
-		
 		<nav class="navbar navbar-expand-md navbar-light bg-light sticky">
 			<!-- Agregar el logo de la pagina/empresa en donde esta escrito el texto LOGO, buscar la imagen logo ya que no funicona la que descarger -->
 			<a class="navbar-brand" href="#"> 
@@ -63,7 +49,7 @@
 				<a class="nav-item nav-link" href="tienda.html">Tienda</a>
 				<a class="nav-item nav-link" href="trabajos.html">Nuestro Trabajo</a>
 				<a class="nav-item nav-link active" href="#">Contratar Detailing<span class="sr-only"> (current)</span></a>
-				<button class="nav-item carro-compra ml-1 border-0 bg-transparent" data-toggle-carrito>
+				<button class="nav-item carro-compra ml-1 border-0 bg-transparent">
 					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
 						<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
 					</svg>
@@ -77,30 +63,21 @@
 		
         <main class="main p-4 m-5">
             <div class="container my-5">
-                <h2 class="text-center mb-5">Datos de Contacto</h2>
-                <form class="w-50 mx-auto" id="form_contacto">
-                    <div class="form-group row">
-                        <label class="col-5" for="rut">RUT</label>
-                        <input class="col-7" type="text" id="rut" name="rut" placeholder="12345678-9">
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-5" for="nombre">Nombre</label>
-                        <input class="col-7" type="text" id="nombre" name="nombre" placeholder="Fulanito Perez">
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-5" for="telefono">Numero de contacto</label>
-                        <input class="col-7" type="text" id="telefono" name="telefono" placeholder="9 1234 5678">
-                    </div>
+                <h2 class="text-center mb-5">Registrar Usuario</h2>
+                <form class="w-50 mx-auto" id="form_signup">
                     <div class="form-group row">
                         <label class="col-5" for="email">Correo Electronico</label>
                         <input class="col-7" type="email" class="form-control" id="email" name="email" placeholder="correo@proveedor.com">
                     </div>
                     <div class="form-group row">
-                        <label class="col-5" for="rut">Producto que desea contratar</label>
-                        <input class="col-7" type="text" id="rut" name="producto" placeholder="Spoiler">
+                        <label class="col-5" for="password">Contraseña</label>
+                        <input class="col-7" type="password" id="password" name="password" placeholder="123456">
                     </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                
+                    <div class="form-group row">
+                        <label class="col-5" for="confirm">Confirmar Contraseña</label>
+                        <input class="col-7" type="password" id="confirm" name="confirm" placeholder="123456">
+                    </div>
+                    <button type="submit" class="btn btn-info">Sign Up</button>
                 </form>
             </div>
         </main>
@@ -117,10 +94,8 @@
 				<div class="footer__box">
 					<h2 class="footer__titulo footer__titulo--about">SOBRE NOSOTROS</h2>
 					<P class="footer__contenido">
-						En AR Repuestos somos una empresa dedicada a la venta de repuestos de vehiculos 
-						y estetica automotriz. Buscamos desarrollar y colaborar permanentemente
-						en la entrega de soluciones, para asi brindar un servicio de calidad a las personas,
-						comunidades y empresas.
+						Somos una empresa dedidaca a refacciones de autos la cual lo unico que queremos hacer como empresa es mejorar la satisfaccion de compra para nuestros clientes
+						lo cual es es nuestra prioridad, tambien nos encargamos de traer los mejores productos para nuestros clientes.
 					</P>
 				</div>
 				<div class="footer__box">
@@ -161,6 +136,6 @@
 		<!-- Main Script -->
 		<script src="/assets/js/index.js" type="module"></script>
 		<!-- Detailing Script -->
-		<script src="/assets/js/views/detailing.js" type="module"></script>
+		<script src="/assets/js/views/signUp.js" type="module"></script>
 	</body>
 </html>
