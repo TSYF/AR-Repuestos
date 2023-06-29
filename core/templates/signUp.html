@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
 {% block main %}
+{% csrf_token %}
 	<main class="main p-4 m-5">
 		<div class="container my-5">
 			<h2 class="text-center mb-5">Registrar Usuario</h2>
-			<form class="w-50 mx-auto" id="form_signup">
+			<form method="POST" action="{% {% url 'handleSignup' %} %}" class="w-50 mx-auto" id="form_signup">
 				<div class="form-group row">
 					<label class="col-5" for="email">Correo Electronico</label>
 					<input class="col-7" type="email" class="form-control" id="email" name="email" placeholder="correo@proveedor.com">
