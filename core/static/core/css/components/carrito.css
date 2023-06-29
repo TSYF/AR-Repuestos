@@ -6,14 +6,19 @@
 
     position: absolute;
     top: 4.5rem;
-    right: 0;
+    transform: translateX(-10rem);
     z-index: 6;
 
 
-    border: 2px solid #CCCCCC;
     border-top: none;
     border-right: none;
-    border-radius: 0 0 0 1em;
+    border-radius: 0 0 1em 1em;
+}
+
+@media screen and (max-width: 768px) {
+    .carrito {
+        top: 4rem;
+    }
 }
 
 .carrito__header {
