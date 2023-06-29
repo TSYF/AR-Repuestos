@@ -1,19 +1,45 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
+from .models import Producto, ContactoServicio, Cliente, Servicio
 
 # Create your views here.
 
 def home(request):
-    # return HttpResponse("Hola desde Django")
     return render(request, "index.html")
 
-def tienda(request):
-    return render(request, "tienda.html")
+def tienda(request, page = 1):
+    limit = 6
+    
+    productos = Producto.objects.all()
 
-def producto(request):
-    return render(request, "producto.html")
+    paginator = Paginator(productos, limit)
 
-def detailing(request):
-    return render(request, "detailing.html")
+    data = {
+        "page": paginator.get_page(page)
+    }
+
+    return render(request, "tienda.html", data)
+
+def producto(request, id):
+
+    producto = Producto.objects.get(id=id)
+
+    data = {
+        "producto": producto
+    }
+    
+    return render(request, "producto.html", data)
+
+def detailing_create(request):
+    data = {
+        'form': ContactoServicio()
+    }
+
+    if (request.method == 'GET'):
+        
+        data["servicios"] = Servicio.objects.all()
+
+    return render(request, "detailing.html", data)
 
 def trabajos(request):
     return render(request, "trabajos.html")
