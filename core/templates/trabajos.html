@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+	<link rel="stylesheet" href="{% static 'core/css/pages/trabajos.css' %}">
+{% endblock head %}
+{% block main %}
+	<main class="main bg-dark py-2 m-0">
+		<section class="container-fluid">
+			<div class="row p-5 text-light">
+				<!-- Diseño 1 -->
+				<div class="col-md-4">
+					<!--falta agregar las imagen correspodientes-->
+					<img src="{% static 'core/img/trabajos/ARR_mercedes.JPEG' %}" class="img-fluid rounded" alt="Muestra de nuestro trabajo">
+				</div>
+				<div class="col-md-8">
+					<h2>Reparación de Autos</h2>
+					<p>Como se puede observar en la imagen de referecnia nuestra empresa esta a cargar de la reparacion de autos por lo tanto años de experecia que tenemos, por lo tanto si necesita ayuda con tu auto llamanos</p>
+				</div>
+			</div>
+			<div class="row p-5 bg-light text-dark">
+				<!-- Diseño 2 con una puequña diferencia que lo tira a la derecha en vez de a la izqueirda -->
+				<div class="col-md-8" class="Moto">
+					<h2>Reparación de un motor</h2>
+					<p>Como se puede observar en la imagen de referecnia de nuestra empresa nosostro reparamos todo tipo de cosa relacioanda con los auto ademas de vender todo tipo de pieza que se relacionan con ella, por lo tanto si necsita nuestra ayuda no dude en contactarnos</p>
+				</div>
+				<div class="col-md-4">
+					<img src="{% static 'core/img/trabajos/ARR_mazda.JPEG' %}" class="img-fluid rounded" alt="Muestra de nuestro trabajo">
+				</div>
+			</div>
+			<div class="row p-5 text-light">
+				<!-- Diseño 3 es igual 1 -->
+				<div class="col-md-4">
+					<img src="{% static 'core/img/trabajos/ARR_symbol.JPEG' %}" class="img-fluid rounded" alt="Muestra de nuestro trabajo">
+				</div>
+				<div class="col-md-8">
+					<h2>Venta de respuesto</h2>
+					<p> Nuestra tienda virtual/pagina web esta encargada de llevar nuestro producto y experecia a un maximo nivel con nuestro cliente ademas de poseer un gran stock de producto tenemos la acreditacion de haber trabajado con grande marca y poseer lo respuesto de esa grande marca, por lo tanto si necestia nuestra ayuda no dude en contactarnos</p>
+				</div>
+			</div>
+		</section>
+	</main>
+{% endblock main %}
