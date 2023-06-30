@@ -16,6 +16,16 @@
 
 		<div class="container text-center my-5">
 			<div class="btn-group" role="group">
+				
+				{% if page.has_previous %}
+					<a
+						type="button"
+						class="btn btn-secondary"
+						href="{% url 'tienda.page' page.previous_page_number %}"
+					>
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					</a>
+				{% endif %}
 				{% for i in page.paginator.page_range %}
 					<a
 						type="button"
@@ -25,6 +35,15 @@
 						{{ i }}
 					</a>
 				{% endfor %}
+				{% if page.has_next %}
+					<a
+						type="button"
+						class="btn btn-secondary"
+						href="{% url 'tienda.page' page.next_page_number %}"
+					>
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					</a>
+				{% endif %}
 			</div>
 		</div>
 	</main>
