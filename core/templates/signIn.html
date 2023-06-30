@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+		
+{% block main %}
+{% csrf_token %}
+	<main class="main p-4 m-5">
+		<div class="container my-5">
+			<h2 class="text-center mb-5">Login</h2>
+			<form class="w-50 mx-auto" id="form_login">
+				<div class="form-group row">
+					<label class="col-5" for="email">Correo Electronico</label>
+					<input class="col-7" type="email" class="form-control" id="email" name="email" placeholder="correo@proveedor.com">
+				</div>
+				<div class="form-group row">
+					<label class="col-5" for="password">Contraseña</label>
+					<input class="col-7" type="password" id="password" name="password" placeholder="123456">
+				</div>
+				<button type="submit" class="btn btn-info">Log In</button>
+			</form>
+		</div>
+	</main>
+{% endblock main %}
+
+{% block scripts %}
+	<!-- signIn Script -->
+	<script src="/assets/js/views/signIn.js" type="module"></script>
+{% endblock scripts %}
