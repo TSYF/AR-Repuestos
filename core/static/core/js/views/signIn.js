@@ -15,7 +15,7 @@ form.addEventListener("submit", e => {
             $("#email").val("");
             $("#password").val("");
             $("#displayUser").text("@" + res.email.split("@")[0]);
-            open("", "_self");
+            open("/", "_self");
         }).catch(error => {
             if (error.code === "auth/user-not-found") {
                 alert("Usuario No Existe");
