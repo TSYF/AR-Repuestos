@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-		
+
+{% load static %}
+
 {% block main %}
 	<main class="main p-4 m-5">
 		<div class="container my-5">
@@ -21,5 +23,5 @@
 
 {% block scripts %}
 	<!-- signIn Script -->
-	<script src="/assets/js/views/signIn.js" type="module"></script>
+	<script src="{% static 'core/js/views/signIn.js' %}" type="module"></script>
 {% endblock scripts %}
