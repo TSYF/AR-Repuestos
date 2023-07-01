@@ -31,7 +31,7 @@ form.addEventListener("submit", e => {
                     $("#password").val("");
                     $("#confirm").val("");
                     $("#displayUser").text("@" + signedUser.email.split("@")[0]);
-                    open("index.html", "_self");
+                    open("", "_self");
                 }).catch(error => {
                     error.code && alert(userUtils.state.errorMessages[error.code]);
                 });
