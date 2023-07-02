@@ -3,7 +3,7 @@
 ## Descripción General
 Tienda online de repuestos, accesorios y estética automotriz. Basada en la empresa chilena de mismo nombre y giro.
 <br>
-El propósito del proyecto es tanto crear un producto viable para AR Repuestos como servir de experiencia de aprendizaje para el equipo, lo cual .
+El propósito del proyecto es tanto crear un producto viable para AR Repuestos como servir de experiencia de aprendizaje para el equipo.
 <br>
 Para un producto mínimo viable, la aplicación tendrá la capacidad de:
 * Acceder a una breve descripción de la empresa y sus servicios.

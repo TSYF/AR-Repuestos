@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+	<link rel="stylesheet" href="assets/css/pages/producto.css">
+{% endblock head %}
+
+{% block main %}
+	<main class="main p-2">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<img class="w-100 rounded" src="{% static 'core/img/' %}{{ producto.img }}" alt="Producto">
+				</div>
+				<div class="col-md-8 ">
+					<div class="ml-md-3">
+					<h2 class="h-producto my-4">
+						{{ producto.nombre }}
+					</h2>
+
+					<p>
+						Descripción: <span class="font-italic">{{ producto.descripcion }}</span>
+					<p>
+						{{ producto.texto|linebreaksbr }}
+					</p>
+
+					{% if producto.stock <= 0 %}
+						<p class="mt-5 font-weight-light">
+							Este producto no esta dispoible porque no queda en stock
+						</p>
+					{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{% endblock main %}
