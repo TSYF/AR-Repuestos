@@ -1,0 +1,2 @@
+alias dj="python3 manage.py"
+alias djr="python3 manage.py runserver"
