@@ -37,6 +37,28 @@ class EstadoProducto(models.Model):
         verbose_name = "estado del producto"
         verbose_name_plural = "estados del producto"
         
+class Orden(models.Model):
+
+    id = models.AutoField("Id de orden", primary_key=True)
+    usuario = models.ForeignKey("auth.User", verbose_name="Id del usuario", on_delete=models.CASCADE, default=1)
+    productos = models.ManyToManyField("core.Producto", verbose_name="Productos de la orden", through="core.ProductoOrden")
+    estado_pago = models.BooleanField("Estado de pago de la orden", default=False)
+
+    class Meta:
+        verbose_name = "orden"
+        verbose_name_plural = "ordenes"
+
+
+class ProductoOrden(models.Model):
+
+    id = models.AutoField("Id de relación producto-orden", primary_key=True)
+    producto = models.ForeignKey("core.Producto", verbose_name="Producto", on_delete=models.CASCADE)
+    orden = models.ForeignKey("core.Orden", verbose_name="Orden", on_delete=models.CASCADE)
+    cantidad = models.PositiveSmallIntegerField("Cantidad de productos")
+
+    class Meta:
+        verbose_name = "producto-orden"
+        verbose_name_plural = "productos-ordenes"    
 
 class Servicio(models.Model):
     

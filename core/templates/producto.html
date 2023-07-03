@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block head %}
-	<link rel="stylesheet" href="assets/css/pages/producto.css">
+	<link rel="stylesheet" href="{% static 'core/css/pages/producto.css' %}">
 {% endblock head %}
 
 {% block main %}
@@ -22,13 +22,38 @@
 					<p>
 						Descripción: <span class="font-italic">{{ producto.descripcion }}</span>
 					<p>
-						{{ producto.texto|linebreaksbr }}
+						{{ producto.texto|linebreaks }}
 					</p>
 
 					{% if producto.stock <= 0 %}
 						<p class="mt-5 font-weight-light">
 							Este producto no esta dispoible porque no queda en stock
 						</p>
+					{% else %}
+						{% comment %} 
+							{
+								'id': 2,
+								'nombre': 'Foco Subaru Impresa',
+								'precio': 30000,
+								'img': 'repuestos/ARR_foco.JPEG',
+								'descripcion': None,
+								'texto': None,
+								'stock': 6,
+								'categoria': 4,
+								'estado': None
+							}
+						{% endcomment %}
+					
+						
+						<form id="addToCarro" method="POST">
+							{% csrf_token %}
+							<input type="hidden" name="id" value="{{ producto.id }}">
+							{{ form.nombre }}
+							{{ form.precio }}
+							{{ form.categoria }}
+							{{ form.estado }}
+							<button type="submit" class="btn btn-primary">Añadir Producto</button>
+						</form>
 					{% endif %}
 					</div>
 				</div>
@@ -36,3 +61,7 @@
 		</div>
 	</main>
 {% endblock main %}
+
+{% block scripts %}
+	{% comment %} <script type="module" src="{% static 'core/js/views/producto.js' %}"></script> {% endcomment %}
+{% endblock scripts %}

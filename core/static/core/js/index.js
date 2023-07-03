@@ -1,6 +1,5 @@
 import state from "./utils/state.js";
 import userUtils from './utils/user.js';
-import { showCarrito } from "./utils/carrito.js";
 
 
 $(() => {
@@ -41,5 +40,7 @@ $(() => {
     });
 
     
-    $("[data-toggle-carrito]").click(e => showCarrito() );
+    $("[data-toggle-carro]").click(e => state.cart.showCarro() );
+
+    state.cart.get();
 });
