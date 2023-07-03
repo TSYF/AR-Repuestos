@@ -36,8 +36,6 @@ const state = {
                     }
                 }).then(res => res.json());
 
-                console.log(productos);
-        
                 productos.forEach((producto, i, arr) => {
                     
                     listaCarro.insertAdjacentHTML(
@@ -71,8 +69,6 @@ const state = {
                     "Accept": "application/json"
                 }
             }).then(res => res.json());
-
-            console.log(producto);
 
             location.reload();
             
