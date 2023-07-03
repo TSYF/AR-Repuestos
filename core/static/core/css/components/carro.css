@@ -1,8 +1,5 @@
-.carrito {
+.carro {
     padding: 1em;
-
-    height: 200px;
-    width: 20rem;
 
     position: absolute;
     top: 4.5rem;
@@ -16,16 +13,16 @@
 }
 
 @media screen and (max-width: 768px) {
-    .carrito {
+    .carro {
         top: 4rem;
     }
 }
 
-.carrito__header {
+.carro__header {
     text-align: center;
 }
 
-.carrito__item-list {
+.carro__item-list {
     font-size: 18px;
     list-style: none;
     
@@ -34,15 +31,15 @@
 }
 
 
-.carrito__item {
+.carro__item {
     border-bottom: 2px solid #CCCCCC;
 }
-.carrito__item:last-child {
+.carro__item:last-child {
     border-bottom: none;
 }
 
 
-.carrito__item-count {
+.carro__item-count {
     display: inline-block;
     margin-left: auto;
 }
