@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Cliente, Servicio, ContactoServicio
+from core.models import Cliente, Servicio, ContactoServicio, Orden, Producto
 
 
 class ClienteSerializer(serializers.ModelSerializer):
@@ -68,3 +68,20 @@ class ContactoServicioWriteSerializer(ContactoServicioSerializer):
         )
 
         return formulario_contacto
+    
+    
+class OrdenSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Orden
+        fields = [
+            "id",
+            "productos",
+            "estado_pago"
+        ]
+        
+
+class ProductoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Producto
+        fields = "__all__"
