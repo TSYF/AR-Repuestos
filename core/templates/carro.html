@@ -50,6 +50,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <button class="btn btn-primary" onclick="buyCart()">Comprar</button>
                     </div>
                 </div>
             </div>
@@ -58,6 +59,18 @@
 {% endblock main %}
 
 {% block scripts %}
+    <script>
+        const cart = [
+            {% for item in carro %}
+                {
+                    id:{{ item.id }},
+                    nombre:'{{ item.nombre }}',
+                    precio:{{ item.precio }},
+                    cantidad:{{ item.cantidad }}
+                },
+            {% endfor %}
+        ];
+    </script>
 	<!-- Carro Script -->
 	<script src="{% static 'core/js/views/carro.js' %}"></script>
 {% endblock scripts %}
