@@ -3,8 +3,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view 
 from rest_framework.response import Response 
 from django.views.decorators.csrf import csrf_exempt
-from core.models import Cliente, Servicio, ContactoServicio
-from .serializers import ClienteSerializer, ServicioSerializer, ContactoServicioSerializer, ContactoServicioReadSerializer, ContactoServicioWriteSerializer
+from core.models import ContactoServicio, Orden
+from .serializers import ContactoServicioReadSerializer, ContactoServicioWriteSerializer, OrdenSerializer
 
 
 # ACTUALMENTE SIN USO.
@@ -53,3 +53,67 @@ def detailing_store(request):
         return Response(form_serializer.data, status.HTTP_201_CREATED)
     else:
         return Response(form_serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET"])
+def orden_index(request):
+    ordenes = Orden.objects.all()
+    
+    ordenes_data = OrdenSerializer(ordenes, many=True).data
+    
+    return Response(ordenes_data, status.HTTP_200_OK)
+
+
+@api_view(["GET"])
+def carro_index(request):
+    
+    return Response( request.session.get("carro", []), status.HTTP_200_OK )
+
+@api_view(["POST"])
+def carro_store(request):
+    
+    producto = request.data
+
+    if request.session.get("carro", False):
+        request.session["carro"] = []
+
+    request.session["carro"].append(producto)
+    
+    return Response(
+        {
+            "carro": request.session["carro"][-1],
+            "status": "OK"
+        },
+        status.HTTP_200_OK
+    )
+
+@csrf_exempt
+@api_view(["DELETE"])
+def carro_delete(request, id):
+    
+    carro = request.session["carro"]
+    
+    request.session["carro"] = [ item for item in carro if item["id"] != id ]
+
+    return Response(carro, status.HTTP_200_OK)
+
+
+@csrf_exempt
+@api_view(["PATCH"])
+def carro_update(request, id):
+    
+    carro = request.session["carro"]
+    
+    for i, item in enumerate(carro):
+        if item["id"] == id:
+            for key, value in request.data.items():
+                if key == "cantidad":
+                    carro[i]["subtotal"] = carro[i]["precio"] * value
+                
+                carro[i][key] = value
+    
+    request.session["carro"] = carro
+
+    return Response(carro, status.HTTP_200_OK)
+
+
