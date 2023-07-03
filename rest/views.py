@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response 
 from django.views.decorators.csrf import csrf_exempt
 from core.models import ContactoServicio, Orden
-from .serializers import ContactoServicioReadSerializer, ContactoServicioWriteSerializer, OrdenSerializer
+from .serializers import ContactoServicioReadSerializer, ContactoServicioWriteSerializer, OrdenSerializer, ProductoOrdenSerializer
 
 
 # ACTUALMENTE SIN USO.
@@ -117,3 +117,35 @@ def carro_update(request, id):
     return Response(carro, status.HTTP_200_OK)
 
 
+@csrf_exempt
+@api_view(["POST"])
+def orden_store(request):
+
+    data = request.data
+
+    orden = {
+        "productos": [prod["id"] for prod in data],
+        "estado_pago": True
+    }
+
+    
+    orden_serializer = OrdenSerializer(data=orden)
+
+
+    if orden_serializer.is_valid():
+        orden_instance = orden_serializer.save()
+        producto_orden = [{"producto": producto["id"], "orden": orden_instance.id, "cantidad": producto["cantidad"]} for producto in data ]
+        producto_orden_serializer = ProductoOrdenSerializer(data=producto_orden, many=True)
+
+        if producto_orden_serializer.is_valid():
+            orden_instance = orden_serializer.save()
+            producto_orden_serializer.save()
+
+            request.session["carro"] = []
+            
+            return Response(orden_serializer.data, status.HTTP_200_OK)
+        else:
+            return Response(producto_orden_serializer.errors, status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(orden_serializer.errors, status.HTTP_400_BAD_REQUEST)
+    

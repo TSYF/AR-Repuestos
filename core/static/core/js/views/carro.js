@@ -18,12 +18,29 @@ const updateCartItem = async(id) => {
         method: "PATCH",
         headers: {
             "Accept": "application/json",
-            "Content-Type": "application/json "
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({cantidad})
     }).then(res => res.json());
 
     location.reload();
     
+    return carro;
+}
+
+const buyCart = async() => {
+    
+
+    const carro = await fetch(`/orden/buy`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json "
+        },
+        body: JSON.stringify(cart)
+    }).then(res => res.json());
+
+    location.reload()
+
     return carro;
 }
