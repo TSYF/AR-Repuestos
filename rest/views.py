@@ -8,7 +8,6 @@ from .serializers import (ContactoServicioReadSerializer, ContactoServicioWriteS
     OrdenSerializer, ProductoOrdenSerializer, UserSerializer)
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from django.forms.models import model_to_dict
 
 
 # ACTUALMENTE SIN USO.
