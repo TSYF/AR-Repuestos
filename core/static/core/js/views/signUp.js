@@ -6,7 +6,7 @@ const form = document.getElementById("form_signup");
 form.addEventListener("submit", e => {
     e.preventDefault();
 
-    const { usernameSignIn: emailSignIn, registerUser } = userUtils;
+    const { usernameSignIn, registerUser, loadUserUI } = userUtils;
 
     const username = $("#username").val();
     const email = $("#email").val();
@@ -24,19 +24,20 @@ form.addEventListener("submit", e => {
     registerUser(username, email, password)
         .then(user => {
 
-            const { username } = user;
+            const { username: name } = user;
 
-            emailSignIn(username, password)
+            usernameSignIn(name, password)
                 .then(signedUser => {
+                    $("#username").val("");
                     $("#email").val("");
                     $("#password").val("");
                     $("#confirm").val("");
                     loadUserUI(signedUser);
                     // open("/", "_self");
                 }).catch(error => {
-                    error.code && alert(userUtils.state.errorMessages[error.code]);
+                    error.code && alert(error.message);
                 });
         }).catch(error => {
-            error.code && alert(userUtils.state.errorMessages[error.code]);
+            error.code && alert(error.message);
         });
 });

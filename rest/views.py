@@ -163,8 +163,6 @@ def orden_store(request):
 @api_view(["POST"])
 def signup_user(request):
     
-    # user = User.objects.create_user(data["username"], data["email"], data["password"])
-
     serializer = UserSerializer(data=request.data)
     
     if serializer.is_valid():    
