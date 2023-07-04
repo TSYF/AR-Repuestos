@@ -4,7 +4,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response 
 from django.views.decorators.csrf import csrf_exempt
 from core.models import ContactoServicio, Orden
-from .serializers import ContactoServicioReadSerializer, ContactoServicioWriteSerializer, OrdenSerializer, ProductoOrdenSerializer
+from .serializers import (ContactoServicioReadSerializer, ContactoServicioWriteSerializer,
+    OrdenSerializer, ProductoOrdenSerializer, UserSerializer)
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.forms.models import model_to_dict
 
 
 # ACTUALMENTE SIN USO.
@@ -155,3 +159,52 @@ def orden_store(request):
     else:
         return Response(orden_serializer.errors, status.HTTP_400_BAD_REQUEST)
     
+    
+@api_view(["POST"])
+def signup_user(request):
+    
+    # user = User.objects.create_user(data["username"], data["email"], data["password"])
+
+    serializer = UserSerializer(data=request.data)
+    
+    if serializer.is_valid():    
+        serializer.save()
+        return Response(serializer.data, status.HTTP_201_CREATED)
+
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+        
+
+@api_view(["POST"])
+def signin_user(request):
+    
+    if request.user.is_authenticated:
+        return Response({'message': 'User already authenticated.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    username = request.data["username"]
+    password = request.data["password"]
+    user = authenticate(request, username=username, password=password)
+
+    if user is not None:
+        login(request, user)
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    else:
+        return Response({'message': 'Invalid username or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+@api_view(["GET"])
+def get_user(request):
+    if not request.user.is_authenticated:
+        return Response({'message': 'User not authenticated.', "status": 401}, status=status.HTTP_401_UNAUTHORIZED)
+
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(["GET"])
+def signout_user(request):
+    if not request.user.is_authenticated:
+        return Response({'message': 'User not authenticated.', "status": 401}, status=status.HTTP_401_UNAUTHORIZED)
+
+    logout(request)
+    return Response({'message': 'User logged out.'}, status=status.HTTP_200_OK)
