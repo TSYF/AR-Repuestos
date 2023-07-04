@@ -5,20 +5,18 @@ const form = document.getElementById("form_login");
 form.addEventListener("submit", e => {
     e.preventDefault();
 
-    const { emailSignIn } = userUtils;
+    const { usernameSignIn: usernameSignIn, loadUserUI } = userUtils;
 
-    const email = $("#email").val();
+    const username = $("#username").val();
     const password = $("#password").val();
     
-    emailSignIn(email, password)
-        .then(res => {
-            $("#email").val("");
+    usernameSignIn(username, password)
+        .then(user => {
+            $("#username").val("");
             $("#password").val("");
-            $("#displayUser").text("@" + res.email.split("@")[0]);
-            open("/", "_self");
+            loadUserUI(user);
+            // open("/", "_self");
         }).catch(error => {
-            if (error.code === "auth/user-not-found") {
-                alert("Usuario No Existe");
-            }
+            console.log(error);
         });
 });

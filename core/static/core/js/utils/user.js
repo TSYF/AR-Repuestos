@@ -1,52 +1,54 @@
 import state from "./state.js";
-import { auth } from "./auth/firebaseConfig.js";
-import {
-	createUserWithEmailAndPassword,
-	signInWithEmailAndPassword,
-	signOut,
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 
 const userUtils = {
     state: {
         errorMessages: {
-            "auth/missing-password": "Falta Contraseña",
-            "auth/invalid-email": "Email Inválido",
-            "auth/user-not-found": "Usuario no Existe",
-            "auth/wrong-password": "Contraseña Incorrecta",
-            "auth/email-already-in-use": "Email ya está en uso",
-            "auth/operation-not-allowed": "Operación no Permitida",
-            "auth/weak-password": "Contraseña Débil"
         }
     },
-    async registerUser(email, password) {
+    async registerUser(username, email, password) {
         try {
-            const { user } = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
+            const user = await fetch(
+                "/auth/signUp",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({username, email, password})
+                }
+            ).then(res => res.json());
+            
             return user;
         } catch (error) {
             console.trace(error.code);
             throw error;
         }
     },
-    async emailSignIn(email, password) {
+    async usernameSignIn(username, password) {
         try {
-            const { user } = await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
+            const { id, username: name, email } = await fetch(
+                "/auth/signIn",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        username,
+                        password
+                    })
+                }
+            ).then(res => res.json());
 
-            const userData = {
-                uid: user.uid,
-                email: user.email
+            const user = {
+                id,
+                username: name,
+                email
             };
             
-            state.user.setUser(userData);
-            return userData;
+            state.user.setUser(user);
+
+            return user;
         } catch (error) {
             console.trace(error.code);
             throw error;
@@ -54,32 +56,32 @@ const userUtils = {
     },
     async userSignOut() {
         try {
-            await signOut(auth);
+            await fetch("/auth/signOut");
             state.user.setUser({});
         } catch (error) {
             console.trace(error.code);
         }
     },
     currentUser() {
-        return new Promise((resolve, reject) => {
-            const unsuscribe = onAuthStateChanged(
-                auth,
-                async (user) => {
-                    if (user) {
-                        state.user.setUser({
-                            uid: user.uid,
-                            email: user.email
-                        });
-                    } else {
-                        state.user.setUser({});
-                    }
-                    resolve(user);
-                },
-                (e) => reject(e)
-            );
-            unsuscribe();
-        });
+        const response = fetch("/auth").then(res => res.json())
+
+        return response;
     },
+    loadUserUI(user) {
+        $("#displayUser").text("@" + user.username);
+        $("#displayUserManagement").text("@" + user.username);
+        
+        $("#sign_in").addClass("d-none");
+        $("#sign_up").addClass("d-none");
+        $("[data-signout]").removeClass("d-none");
+    },
+    unloadUserUI() {
+        $("#displayUser").text("");
+        $("#displayUserManagement").text("");
+        $("#sign_in").removeClass("d-none");
+        $("#sign_up").removeClass("d-none");
+        $("[data-signout]").addClass("d-none");
+    }
 };
 
 export default userUtils;
