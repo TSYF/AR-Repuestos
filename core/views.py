@@ -35,8 +35,6 @@ def producto(request, id):
             if not request.session.get("carro", False):
                 request.session["carro"] = []
             
-            pass            
-        
         case 'POST':
             carro = request.session["carro"]
             
@@ -92,6 +90,9 @@ def sign_up(request):
 
 def carro_show(request):
 
+    if not request.session.get("carro", False):
+        request.session["carro"] = []
+    
     carro = request.session["carro"]
 
     total = 0
