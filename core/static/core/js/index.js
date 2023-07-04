@@ -4,23 +4,15 @@ import userUtils from './utils/user.js';
 
 $(() => {
 	userUtils.currentUser()
-        .then(res => {
-            if (res) {
-                state.user.loadUser();
-                $("#displayUser").text("@" + res.email.split("@")[0]);
-                $("#displayUserManagement").text("@" + res.email.split("@")[0]);
+        .then(user => {
+            if (user.status !== 401) {
                 
-                $("#sign_in").addClass("d-none");
-                $("#sign_up").addClass("d-none");
-                $("[data-signout]").removeClass("d-none");
+                state.user.loadUser();
+                userUtils.loadUserUI(user);
                 return
             }
 
-            $("#displayUser").text("");
-            $("#displayUserManagement").text("");
-            $("#sign_in").removeClass("d-none");
-            $("#sign_up").removeClass("d-none");
-            $("[data-signout]").addClass("d-none");
+            userUtils.unloadUserUI();
         });
 
     $("[data-toggle-user]").click(e => {
@@ -30,11 +22,7 @@ $(() => {
     $("[data-signout]").click(e => {
         userUtils.userSignOut()
             .then(res => {
-                $("#displayUser").text("");
-                $("#displayUserManagement").text("");
-                $("#sign_in").removeClass("d-none");
-                $("#sign_up").removeClass("d-none");
-                $("[data-signout]").addClass("d-none");
+                userUtils.unloadUserUI();
             });       
             
     });

@@ -6,8 +6,9 @@ const form = document.getElementById("form_signup");
 form.addEventListener("submit", e => {
     e.preventDefault();
 
-    const { emailSignIn, registerUser } = userUtils;
+    const { usernameSignIn: emailSignIn, registerUser } = userUtils;
 
+    const username = $("#username").val();
     const email = $("#email").val();
     const password = $("#password").val();
     const confirmPassword = $("#confirm").val();
@@ -20,18 +21,18 @@ form.addEventListener("submit", e => {
         return alert("Contraseñas no Coinciden");
     }
     
-    registerUser(email, password)
+    registerUser(username, email, password)
         .then(user => {
 
-            const { email: userEmail } = user;
+            const { username } = user;
 
-            emailSignIn(userEmail, password)
+            emailSignIn(username, password)
                 .then(signedUser => {
                     $("#email").val("");
                     $("#password").val("");
                     $("#confirm").val("");
-                    $("#displayUser").text("@" + signedUser.email.split("@")[0]);
-                    open("/", "_self");
+                    loadUserUI(signedUser);
+                    // open("/", "_self");
                 }).catch(error => {
                     error.code && alert(userUtils.state.errorMessages[error.code]);
                 });
