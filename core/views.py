@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
+from django.shortcuts import redirect
 from .models import Producto, ContactoServicio, Cliente, Servicio
 from .forms import ProductoForm
 
@@ -89,6 +90,9 @@ def sign_up(request):
 
 
 def carro_show(request):
+
+    if not request.user.is_authenticated:
+        return redirect(request.META.get('HTTP_REFERER'))
 
     if not request.session.get("carro", False):
         request.session["carro"] = []
