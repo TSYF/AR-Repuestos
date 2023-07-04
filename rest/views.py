@@ -91,6 +91,9 @@ def carro_store(request):
 @api_view(["DELETE"])
 def carro_delete(request, id):
     
+    if not request.session.get("carro", False):
+                request.session["carro"] = []
+    
     carro = request.session["carro"]
     
     request.session["carro"] = [ item for item in carro if item["id"] != id ]
@@ -101,6 +104,9 @@ def carro_delete(request, id):
 @csrf_exempt
 @api_view(["PATCH"])
 def carro_update(request, id):
+    
+    if not request.session.get("carro", False):
+                request.session["carro"] = []
     
     carro = request.session["carro"]
     
