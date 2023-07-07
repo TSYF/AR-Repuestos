@@ -8,54 +8,130 @@ from .serializers import (ContactoServicioReadSerializer, ContactoServicioWriteS
     OrdenSerializer, ProductoOrdenSerializer, UserSerializer)
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from rest_framework import views
+from .utils import construct_drf_response
 
 
-# ACTUALMENTE SIN USO.
-@api_view(["GET"])
-def detailing_index(request):
+class DetailingAPIView(views.APIView):
+
+    def get(self, request, id=None):
+        
+        forms_serializer = None
+
+        if id is None:
+            forms = ContactoServicio.objects.all()
+            forms_serializer = ContactoServicioReadSerializer(forms, many=True)
+        else:
+            form = ContactoServicio.objects.get(id=id)
+            forms_serializer = ContactoServicioReadSerializer(form)
+            
+        return construct_drf_response(forms_serializer.data, 200)
+
     
-    forms = ContactoServicio.objects.all()
+    def post(self, request, id=None):
+        
+        data = request.data
+        
+        nombre = data["nombre"]
+        rut = data["rut"].split("-")
+        telefono = data["telefono"]
+        email = data["email"]
 
-    forms_serializer = ContactoServicioReadSerializer(forms, many=True)
+        numrut = rut[0]
+        dvrut = rut[1]
+        
 
-    return Response(forms_serializer.data, status=status.HTTP_200_OK)
-    
+        cliente = {
+            "nombre"  : nombre,
+            "numrut"  : numrut,
+            "dvrut"   : dvrut,
+            "telefono": telefono,
+            "email"   : email
+        }
+        
+        form = {
+            "cliente" : cliente,
+            "servicio": data["servicio"]
+        }
 
-# @csrf_exempt
-@api_view(["POST"])
-def detailing_store(request):
-    
-    data = request.data
-    
-    nombre = data["nombre"]
-    rut = data["rut"].split("-")
-    telefono = data["telefono"]
-    email = data["email"]
+        form_serializer = ContactoServicioWriteSerializer(data=form)
+        
+        if form_serializer.is_valid():
+            form_serializer.save()
+            return construct_drf_response(form_serializer.data, 201)
+        else:
+            return construct_drf_response(form_serializer.errors, 400)
 
-    numrut = rut[0]
-    dvrut = rut[1]
-    
 
-    cliente = {
-        "nombre"  : nombre,
-        "numrut"  : numrut,
-        "dvrut"   : dvrut,
-        "telefono": telefono,
-        "email"   : email
-    }
+class CarroAPIView(views.APIView):
     
-    form = {
-        "cliente" : cliente,
-        "servicio": data["servicio"]
-    }
+    def get(self, request, id=None):
+        
+        carro_list = request.session.get("carro", [])
+        
+        if id is None:
+            return construct_drf_response(carro_list, 200)
+        
+        try:
 
-    form_serializer = ContactoServicioWriteSerializer(data=form)
-    
-    if form_serializer.is_valid():
-        form_serializer.save()
-        return Response(form_serializer.data, status.HTTP_201_CREATED)
-    else:
-        return Response(form_serializer.errors, status.HTTP_400_BAD_REQUEST)
+            id = int(id)
+            item = carro_list[id]
+            return construct_drf_response(item, 200)
+            
+        except (ValueError, IndexError):
+            return construct_drf_response("ID must be an integer", 400)
+
+    def post(self, request, id=None):
+        
+        producto = request.data
+
+        if request.session.get("carro", False):
+            request.session["carro"] = []
+
+        request.session["carro"].append(producto)
+        
+        return construct_drf_response(request.session["carro"][-1], 201)
+
+    def delete(self, request, id):
+
+        try:
+            id = int(id)
+        except:
+            return construct_drf_response("ID must be an integer", 400)
+        
+        if not request.session.get("carro", False):
+                    request.session["carro"] = []
+        
+        carro = request.session["carro"]
+        
+        request.session["carro"] = [ item for item in carro if item["id"] != id ]
+
+        return construct_drf_response(carro, 200)
+
+    def patch(self, request, id):
+
+        try:
+            id = int(id)
+        except:
+            return construct_drf_response("ID must be an integer", 400)
+        
+        if not request.session.get("carro", False):
+            request.session["carro"] = []
+        
+        carro = request.session["carro"]
+        
+        for i, item in enumerate(carro):
+            if item["id"] == id:
+                print(item["id"] == id)
+                for key, value in request.data.items():
+                    if key == "cantidad":
+                        carro[i]["subtotal"] = carro[i]["precio"] * value
+                    
+                    carro[i][key] = value
+        
+        request.session["carro"] = carro
+
+        return construct_drf_response(carro, 200)
 
 
 @api_view(["GET"])
@@ -64,69 +140,8 @@ def orden_index(request):
     
     ordenes_data = OrdenSerializer(ordenes, many=True).data
     
-    return Response(ordenes_data, status.HTTP_200_OK)
+    return construct_drf_response(ordenes_data, 200)
 
-
-@api_view(["GET"])
-def carro_index(request):
-    
-    return Response( request.session.get("carro", []), status.HTTP_200_OK )
-
-@api_view(["POST"])
-def carro_store(request):
-    
-    producto = request.data
-
-    if request.session.get("carro", False):
-        request.session["carro"] = []
-
-    request.session["carro"].append(producto)
-    
-    return Response(
-        {
-            "carro": request.session["carro"][-1],
-            "status": "OK"
-        },
-        status.HTTP_200_OK
-    )
-
-@csrf_exempt
-@api_view(["DELETE"])
-def carro_delete(request, id):
-    
-    if not request.session.get("carro", False):
-                request.session["carro"] = []
-    
-    carro = request.session["carro"]
-    
-    request.session["carro"] = [ item for item in carro if item["id"] != id ]
-
-    return Response(carro, status.HTTP_200_OK)
-
-
-@csrf_exempt
-@api_view(["PATCH"])
-def carro_update(request, id):
-    
-    if not request.session.get("carro", False):
-                request.session["carro"] = []
-    
-    carro = request.session["carro"]
-    
-    for i, item in enumerate(carro):
-        if item["id"] == id:
-            for key, value in request.data.items():
-                if key == "cantidad":
-                    carro[i]["subtotal"] = carro[i]["precio"] * value
-                
-                carro[i][key] = value
-    
-    request.session["carro"] = carro
-
-    return Response(carro, status.HTTP_200_OK)
-
-
-@csrf_exempt
 @api_view(["POST"])
 def orden_store(request):
 
@@ -152,11 +167,12 @@ def orden_store(request):
 
             request.session["carro"] = []
             
-            return Response(orden_serializer.data, status.HTTP_200_OK)
+            # return Response(orden_serializer.data, status.HTTP_200_OK)
+            return construct_drf_response(orden_serializer.data, 200)
         else:
-            return Response(producto_orden_serializer.errors, status.HTTP_400_BAD_REQUEST)
+            return construct_drf_response(producto_orden_serializer.errors, 400)
     else:
-        return Response(orden_serializer.errors, status.HTTP_400_BAD_REQUEST)
+        return construct_drf_response(orden_serializer.errors, 400)
     
     
 @api_view(["POST"])
@@ -166,16 +182,16 @@ def signup_user(request):
     
     if serializer.is_valid():    
         serializer.save()
-        return Response(serializer.data, status.HTTP_201_CREATED)
+        return construct_drf_response(serializer.data, 201)
 
-    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+    return construct_drf_response(serializer.errors, 400)
         
 
 @api_view(["POST"])
 def signin_user(request):
     
     if request.user.is_authenticated:
-        return Response({'message': 'User already authenticated.'}, status=status.HTTP_400_BAD_REQUEST)
+        return construct_drf_response('User already authenticated', 200)
 
     username = request.data["username"]
     password = request.data["password"]
@@ -184,24 +200,24 @@ def signin_user(request):
     if user is not None:
         login(request, user)
         serializer = UserSerializer(user)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return construct_drf_response(serializer.data, 200)
     else:
-        return Response({'message': 'Invalid username or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+        return construct_drf_response('Invalid username or password', 401)
 
 
 @api_view(["GET"])
 def get_user(request):
     if not request.user.is_authenticated:
-        return Response({'message': 'User not authenticated.', "status": 401}, status=status.HTTP_401_UNAUTHORIZED)
+        return construct_drf_response('User not authenticated', 401)
 
     serializer = UserSerializer(request.user)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return construct_drf_response(serializer.data, 200)
 
 
 @api_view(["GET"])
 def signout_user(request):
     if not request.user.is_authenticated:
-        return Response({'message': 'User not authenticated.', "status": 401}, status=status.HTTP_401_UNAUTHORIZED)
+        return construct_drf_response('User not authenticated', 401)
 
     logout(request)
-    return Response({'message': 'User logged out.'}, status=status.HTTP_200_OK)
+    return construct_drf_response('User logged out', 200)
