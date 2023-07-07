@@ -42,7 +42,7 @@ form.addEventListener("submit", async e => {
     };
 
     try {
-        const res = await fetch("/contacto-detailing/store", {
+        const res = await fetch("/api/detailing/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

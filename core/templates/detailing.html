@@ -11,7 +11,7 @@
 	<main class="main p-4 m-5">
 		<div class="container my-5">
 			<h2 class="text-center mb-5">Datos de Contacto</h2>
-			<form class="w-50 mx-auto" id="form_contacto" method="POST" action="{% url 'detailing.store' %}"> {% comment %} {% url 'rest.contacto-detailing' %} {% endcomment %}
+			<form class="w-50 mx-auto" id="form_contacto" method="POST" action="{% url 'detailing' %}"> {% comment %} {% url 'rest.contacto-detailing' %} {% endcomment %}
 				{% csrf_token %}
 				<div class="form-group row">
 					<label class="col-5" for="rut">RUT</label>

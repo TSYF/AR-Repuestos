@@ -7,8 +7,8 @@ const userUtils = {
     },
     async registerUser(username, email, password) {
         try {
-            const user = await fetch(
-                "/auth/signUp",
+            const { data: user } = await fetch(
+                "/api/auth/signUp/",
                 {
                     method: "POST",
                     headers: {
@@ -26,8 +26,8 @@ const userUtils = {
     },
     async usernameSignIn(username, password) {
         try {
-            const { id, username: name, email } = await fetch(
-                "/auth/signIn",
+            const { data: user } = await fetch(
+                "/api/auth/signIn/",
                 {
                     method: "POST",
                     headers: {
@@ -40,12 +40,6 @@ const userUtils = {
                 }
             ).then(res => res.json());
 
-            const user = {
-                id,
-                username: name,
-                email
-            };
-            
             state.user.setUser(user);
 
             return user;
@@ -56,14 +50,14 @@ const userUtils = {
     },
     async userSignOut() {
         try {
-            await fetch("/auth/signOut");
+            await fetch("/api/auth/signOut/");
             state.user.setUser({});
         } catch (error) {
             console.trace(error.code);
         }
     },
     currentUser() {
-        const response = fetch("/auth").then(res => res.json())
+        const response = fetch("/api/auth/").then(res => res.json())
 
         return response;
     },
