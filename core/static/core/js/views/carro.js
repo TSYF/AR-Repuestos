@@ -1,5 +1,5 @@
 const deleteCartItem = async(id) => {
-    const carro = await fetch(`/carro/delete/${id}`, {
+    const { data: carro } = await fetch(`/api/carro/${id}/`, {
         method: "DELETE",
         headers: {
             "Accept": "application/json"
@@ -11,14 +11,32 @@ const deleteCartItem = async(id) => {
     return carro;
 }
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 const updateCartItem = async(id) => {
+    const csrftoken = getCookie('csrftoken');
     const cantidad = +prompt("¿Cuantos productos quiere?");
 
-    const carro = await fetch(`/carro/update/${id}`, {
+    const { data: carro } = await fetch(`/api/carro/${id}/`, {
         method: "PATCH",
         headers: {
             "Accept": "application/json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'X-CSRFToken': csrftoken
         },
         body: JSON.stringify({cantidad})
     }).then(res => res.json());
@@ -31,7 +49,7 @@ const updateCartItem = async(id) => {
 const buyCart = async() => {
     
 
-    const carro = await fetch(`/orden/buy`, {
+    const { data: carro } = await fetch(`/api/orden/buy/`, {
         method: "POST",
         headers: {
             "Accept": "application/json",
