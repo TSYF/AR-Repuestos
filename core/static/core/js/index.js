@@ -3,16 +3,18 @@ import userUtils from './utils/user.js';
 
 
 $(() => {
-	userUtils.currentUser()
-        .then(user => {
-            if (user.status !== 401) {
+    const { currentUser, loadUserUI, unloadUserUI, userSignOut } = userUtils;
+    
+	currentUser()
+        .then(({ data: user, code }) => {
+            if (code !== 401) {
                 
                 state.user.loadUser();
-                userUtils.loadUserUI(user);
+                loadUserUI(user);
                 return
             }
 
-            userUtils.unloadUserUI();
+            unloadUserUI();
         });
 
     $("[data-toggle-user]").click(e => {
@@ -20,9 +22,9 @@ $(() => {
     });
 
     $("[data-signout]").click(e => {
-        userUtils.userSignOut()
+        userSignOut()
             .then(res => {
-                userUtils.unloadUserUI();
+                unloadUserUI();
             });       
             
     });
