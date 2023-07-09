@@ -44,16 +44,17 @@
 							}
 						{% endcomment %}
 					
-						
-						<form id="addToCarro" method="POST">
-							{% csrf_token %}
-							<input type="hidden" name="id" value="{{ producto.id }}">
-							{{ form.nombre }}
-							{{ form.precio }}
-							{{ form.categoria }}
-							{{ form.estado }}
-							<button type="submit" class="btn btn-primary">Añadir Producto</button>
-						</form>
+						{% if user.is_authenticated %}
+							<form id="addToCarro" method="POST">
+								{% csrf_token %}
+								<input type="hidden" name="id" value="{{ producto.id }}">
+								{{ form.nombre }}
+								{{ form.precio }}
+								{{ form.categoria }}
+								{{ form.estado }}
+								<button type="submit" class="btn btn-primary">Añadir Producto</button>
+							</form>
+						{% endif %}
 					{% endif %}
 					</div>
 				</div>
