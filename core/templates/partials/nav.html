@@ -13,23 +13,25 @@
         <div class="ms-auto d-flex justify-content-space-between align-items-center">
             <div class="">
                 <div class="widgets">
-                    <article id="carro" class="carro d-none bg-light p-2">
-                        <h4 class="carro__header">Carrito de Compra</h4>
-                        <section class="carro__body">
-                            <ul class="carro__item-list" data-carro-lista>
-                            </ul>
-                        </section>
-                        <div class="d-flex justify-content-between align-items-center px-3">
-                            <span data-carro-total class="text-right">
-                            </span>
-                            <a href="{% url 'carro.show' %}" class="btn btn-primary">Ir al Carro</a>
-                        </div>
-                    </article>
-                    <button class="nav-item carro-compra ml-1 border-0 bg-transparent" data-toggle-carro>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                        </svg>
-                    </button>
+                    {% if user.is_authenticated %}
+                        <article id="carro" class="carro d-none bg-light p-2">
+                            <h4 class="carro__header">Carrito de Compra</h4>
+                            <section class="carro__body">
+                                <ul class="carro__item-list" data-carro-lista>
+                                </ul>
+                            </section>
+                            <div class="d-flex justify-content-between align-items-center px-3">
+                                <span data-carro-total class="text-right">
+                                </span>
+                                <a href="{% url 'carro.show' %}" class="btn btn-primary">Ir al Carro</a>
+                            </div>
+                        </article>
+                        <button class="nav-item carro-compra ml-1 border-0 bg-transparent" data-toggle-carro>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                            </svg>
+                        </button>
+                    {% endif %}
                     <article id="manageUser" class="manage-user bg-light p-4 d-none">
                         <h4 id="displayUserManagement" class="manage-user__title"></h4>
                         <section class="manage-user__body d-flex flex-column align-items-start">
