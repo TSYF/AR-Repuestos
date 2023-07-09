@@ -6,7 +6,6 @@ from .forms import ProductoForm
 
 # Create your views here.
 
-# TODO: pass is_authenticated to template for conditional content
 def home(request):
     return render(request, "index.html")
 
