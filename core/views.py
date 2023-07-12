@@ -10,7 +10,7 @@ def home(request):
     return render(request, "index.html")
 
 def tienda(request, page = 1):
-    limit = 6
+    limit = 12
     
     productos = Producto.objects.all()
 
