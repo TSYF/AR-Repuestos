@@ -19,6 +19,12 @@ form.addEventListener("submit", async e => {
     const telefono = telefonoInput.value;
     const servicio = servicioInput.value;
 
+
+    if (telefono.substring(0, 2) = "+56") {
+        telefono = telefono.replace(" ", "");
+        telefono = telefono.substring(3, -1);
+    }
+    
     if (!validaRut(rut)) {
         return alert("El RUT no es válido");
     }
@@ -28,7 +34,7 @@ form.addEventListener("submit", async e => {
     }
 
     if (!validaTelefono(telefono)) {
-        return alert("El número de Teléfono no es válido")
+        return alert("El número de Teléfono no es válido");
     }
 
     // return alert("Muchas gracias! Lo contactaremos a la brevedad");
@@ -50,6 +56,19 @@ form.addEventListener("submit", async e => {
             },
             body: JSON.stringify(data)
         }).then(res => res.json());
+
+        if (res.OK) {
+
+            csrf.value = null;
+            nombreInput.value = null;
+            rutInput.value = null;
+            emailInput.value = null;
+            telefonoInput.value = null;
+            servicioInput.value = null;
+            return;
+        }
+
+        alert("Ha ocurrido un error. Por favor intente más tarde.");
 
     } catch (error) {
         console.error(error);
