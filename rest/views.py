@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view 
 from rest_framework.response import Response 
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from core.models import ContactoServicio, Orden
 from .serializers import (ContactoServicioReadSerializer, ContactoServicioWriteSerializer,
@@ -27,7 +28,7 @@ class DetailingAPIView(views.APIView):
             
         return construct_drf_response(forms_serializer.data, 200)
 
-    
+    @method_decorator(csrf_exempt)
     def post(self, request, id=None):
         
         data = request.data
