@@ -1,8 +1,8 @@
 import { validaEmail, validaRut, validaTelefono } from '../utils/detailing.js';
 
-const form = document.getElementById("form_contacto");
+const form = $("#form_contacto");
 
-form.addEventListener("submit", async e => {
+form.submit(async e => {
     e.preventDefault();
 
     const csrf = document.querySelector('[name="csrfmiddlewaretoken"]');
@@ -16,13 +16,13 @@ form.addEventListener("submit", async e => {
     const rut = rutInput.value;
     const nombre = nombreInput.value;
     const email = emailInput.value;
-    const telefono = telefonoInput.value;
+    let telefono = telefonoInput.value;
     const servicio = servicioInput.value;
 
+    telefono = telefono.replace(" ", "");
 
-    if (telefono.substring(0, 2) = "+56") {
-        telefono = telefono.replace(" ", "");
-        telefono = telefono.substring(3, -1);
+    if (telefono.substring(0, 3) === "+56") {
+        telefono = telefono.substring(3);
     }
     
     if (!validaRut(rut)) {
@@ -36,8 +36,6 @@ form.addEventListener("submit", async e => {
     if (!validaTelefono(telefono)) {
         return alert("El número de Teléfono no es válido");
     }
-
-    // return alert("Muchas gracias! Lo contactaremos a la brevedad");
 
     const data = {
         rut,
@@ -59,16 +57,17 @@ form.addEventListener("submit", async e => {
 
         if (res.OK) {
 
+            alert(JSON.stringify(res));
             csrf.value = null;
             nombreInput.value = null;
             rutInput.value = null;
             emailInput.value = null;
             telefonoInput.value = null;
             servicioInput.value = null;
-            return;
+            return location.reload();
         }
 
-        alert("Ha ocurrido un error. Por favor intente más tarde.");
+        throw ("Ha ocurrido un error. Por favor intente más tarde.");
 
     } catch (error) {
         console.error(error);
