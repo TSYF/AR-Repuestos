@@ -25,6 +25,7 @@ $(() => {
         userSignOut()
             .then(res => {
                 unloadUserUI();
+                location.reload();
             });       
             
     });
