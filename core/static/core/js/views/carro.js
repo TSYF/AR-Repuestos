@@ -51,12 +51,14 @@ const updateCartItem = async(id) => {
 
 const buyCart = async() => {
     
+    const csrftoken = getCookie('csrftoken');
 
     const { data: carro } = await fetch(`/api/orden/buy/`, {
         method: "POST",
         headers: {
             "Accept": "application/json",
-            "Content-Type": "application/json "
+            "Content-Type": "application/json",
+            'X-CSRFToken': csrftoken
         },
         body: JSON.stringify(cart)
     }).then(res => res.json());
