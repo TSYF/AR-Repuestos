@@ -25,11 +25,12 @@ export const validaEmail = email => {
 
 /* JS function that'll validate a chilean rut */
 export const validaRut = rut => {
-    rut = rut.replace(/[.-]/g, '');
-  
     if (!rutRegex.test(rut)) {
         return false;
     }
+    
+    rut = rut.replace(/[.-]/g, '');
+    
     const rutSinDigito = rut.slice(0, -1);
     const rutSinDigitoArr = rutSinDigito.split("");
     const digitoVerificador = rut.slice(-1).toUpperCase();
