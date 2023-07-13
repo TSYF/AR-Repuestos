@@ -30,20 +30,6 @@
 							Este producto no esta dispoible porque no queda en stock
 						</p>
 					{% else %}
-						{% comment %} 
-							{
-								'id': 2,
-								'nombre': 'Foco Subaru Impresa',
-								'precio': 30000,
-								'img': 'repuestos/ARR_foco.JPEG',
-								'descripcion': None,
-								'texto': None,
-								'stock': 6,
-								'categoria': 4,
-								'estado': None
-							}
-						{% endcomment %}
-					
 						{% if user.is_authenticated %}
 							<form id="addToCarro" method="POST">
 								{% csrf_token %}
