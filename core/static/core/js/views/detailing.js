@@ -57,7 +57,6 @@ form.submit(async e => {
 
         if (res.OK) {
 
-            alert(JSON.stringify(res));
             csrf.value = null;
             nombreInput.value = null;
             rutInput.value = null;
