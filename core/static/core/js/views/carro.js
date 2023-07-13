@@ -1,8 +1,11 @@
 const deleteCartItem = async(id) => {
+    const csrftoken = getCookie('csrftoken');
+
     const { data: carro } = await fetch(`/api/carro/${id}/`, {
         method: "DELETE",
         headers: {
-            "Accept": "application/json"
+            "Accept": "application/json",
+            'X-CSRFToken': csrftoken
         }
     }).then(res => res.json());
 

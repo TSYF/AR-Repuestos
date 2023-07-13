@@ -82,6 +82,7 @@ class CarroAPIView(views.APIView):
         except (ValueError, IndexError):
             return construct_drf_response("ID must be an integer", 400)
 
+    @method_decorator(csrf_exempt)
     def post(self, request, id=None):
         
         producto = request.data
@@ -93,6 +94,7 @@ class CarroAPIView(views.APIView):
         
         return construct_drf_response(request.session["carro"][-1], 201)
 
+    @method_decorator(csrf_exempt)
     def delete(self, request, id):
 
         try:
@@ -109,6 +111,7 @@ class CarroAPIView(views.APIView):
 
         return construct_drf_response(carro, 200)
 
+    @method_decorator(csrf_exempt)
     def patch(self, request, id):
 
         try:
